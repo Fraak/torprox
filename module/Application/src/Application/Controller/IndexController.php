@@ -13,7 +13,9 @@ class IndexController extends ActionController
      */
     private function getRss($query)
     {
-        $reader = \Zend\Feed\Reader\Reader::import('http://torrentz.eu/feed?q='.urlencode($query));
+        $reader = \Zend\Feed\Reader\Reader::import('http://torrentz.eu/feed');
+        \Zend\Feed\Reader\Reader::getHttpClient()
+            ->setParameterGet(array('q' => $query));
 
         /** @var \Zend\Feed\Reader\Entry\Rss $entry */
         foreach($reader as $entry)
