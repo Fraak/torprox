@@ -1,2 +1,3 @@
 web1:
   name: torprox
+  document_root: public/
