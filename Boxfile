@@ -1,5 +1,2 @@
 web1:
-  name: speakapp
-  
-db1:
-  name: speakdb
+  name: torprox
