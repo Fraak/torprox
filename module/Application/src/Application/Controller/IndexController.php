@@ -13,13 +13,14 @@ class IndexController extends ActionController
      */
     private function getRss($query)
     {
-        $reader = \Zend\Feed\Reader\Reader::import('http://torrentz.eu/feed?q='.$query);
+        $reader = \Zend\Feed\Reader\Reader::import('http://torrentz.eu/feed?q='.urlencode($query));
 
         /** @var \Zend\Feed\Reader\Entry\Rss $entry */
         foreach($reader as $entry)
         {
             /** @var \DOMDocument $dom */
-            preg_match('/Size: ([0-9]* MB) Seeds: ([0-9]*) Peers: ([0-9]*) Hash: ([0-9a-z]*)/', $entry->getDescription(), $matches);
+            preg_match('/Size: ([0-9]* [A-Z]*) Seeds: ([0-9,]*) Peers: ([0-9,]*) Hash: ([0-9a-z]*)/', $entry->getDescription(), $matches);
+
             $dom = $entry->getDomDocument();
             $element = $entry->getElement();
             $element->appendChild($dom->createElement('size', $matches[1]));
