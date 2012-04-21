@@ -3,7 +3,7 @@
 date_default_timezone_set('europe/amsterdam');
 
 chdir(dirname(__DIR__));
-require_once 'vendor/ZendFramework/library';
+require_once (getenv('ZF2_PATH') ?: 'vendor/ZendFramework/library') . '/Zend/Loader/AutoloaderFactory.php';
 Zend\Loader\AutoloaderFactory::factory();
 
 $appConfig = include 'config/application.config.php';
