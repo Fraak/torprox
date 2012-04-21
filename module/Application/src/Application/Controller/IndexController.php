@@ -13,9 +13,13 @@ class IndexController extends ActionController
      */
     private function getRss($query)
     {
-        $reader = \Zend\Feed\Reader\Reader::import('http://torrentz.eu/feed');
-        \Zend\Feed\Reader\Reader::getHttpClient()
-            ->setParameterGet(array('q' => $query));
+        $client = new \Zend\Http\Client('http://torrentz.eu/feed');
+        $client
+            ->getRequest()
+            ->query()
+            ->set('q', $query);
+
+        $reader = \Zend\Feed\Reader\Reader::importString($client->send()->getBody());
 
         /** @var \Zend\Feed\Reader\Entry\Rss $entry */
         foreach($reader as $entry)
