@@ -25,3 +25,6 @@
 [submodule "vendor/TwitterBootstrap"]
 	path = vendor/TwitterBootstrap
 	url = git://github.com/widmogrod/zf2-twitter-bootstrap-module.git
+[submodule "vendor/ChromePhpLogger"]
+	path = vendor/ChromePhpLogger
+	url = git://github.com/juriansluiman/ChromePhpLogger.git
