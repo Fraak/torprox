@@ -19,3 +19,9 @@
 [submodule "vendor/ZfcUserDoctrineORM"]
 	path = vendor/ZfcUserDoctrineORM
 	url = https://github.com/ZF-Commons/ZfcUserDoctrineORM.git
+[submodule "vendor/AsseticBundle"]
+	path = vendor/AsseticBundle
+	url = https://github.com/widmogrod/zf2-assetic-module.git
+[submodule "vendor/TwitterBootstrap"]
+	path = vendor/TwitterBootstrap
+	url = git://github.com/widmogrod/zf2-twitter-bootstrap-module.git

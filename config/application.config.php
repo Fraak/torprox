@@ -2,12 +2,15 @@
 return array(
     'modules' => array(
         'Application',
+        'AsseticBundle',
         'DoctrineModule',
         'DoctrineORMModule',
-        //'TwitterBootstrapFormDecorators',
+        'TwitterBootstrap',
+        'TwitterBootstrapFormDecorators',
         'ZfcBase',
         'ZfcUser',
         'ZfcUserDoctrineORM',
+
     ),
     'module_listener_options' => array( 
         'config_cache_enabled' => false,
