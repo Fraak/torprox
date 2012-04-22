@@ -1,0 +1,27 @@
+[submodule "vendor/ZendFramework"]
+	path = vendor/ZendFramework
+	url = https://github.com/zendframework/zf2.git
+[submodule "vendor/DoctrineModule"]
+	path = vendor/DoctrineModule
+	url = git://github.com/doctrine/DoctrineModule.git
+[submodule "vendor/DoctrineORMModule"]
+	path = vendor/DoctrineORMModule
+	url = git://github.com/doctrine/DoctrineORMModule.git
+[submodule "module/TwitterBootstrap"]
+	path = module/TwitterBootstrap
+	url = git://github.com/widmogrod/zf2-twitter-bootstrap-module.git
+[submodule "module/AsseticBundle"]
+	path = module/AsseticBundle
+	url = https://github.com/widmogrod/zf2-assetic-module.git
+[submodule "vendor/TwitterBootstrapFormDecorators"]
+	path = vendor/TwitterBootstrapFormDecorators
+	url = https://github.com/mwillbanks/TwitterBootstrapFormDecorators.git
+[submodule "vendor/ZfcBase"]
+	path = vendor/ZfcBase
+	url = https://github.com/ZF-Commons/ZfcBase.git
+[submodule "vendor/ZfcUser"]
+	path = vendor/ZfcUser
+	url = https://github.com/ZF-Commons/ZfcUser.git
+[submodule "vendor/ZfcUserDoctrineORM"]
+	path = vendor/ZfcUserDoctrineORM
+	url = https://github.com/ZF-Commons/ZfcUserDoctrineORM.git
