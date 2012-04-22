@@ -1,8 +1,9 @@
 <?php
 return array(
     'modules' => array(
-        //'DoctrineModule',
-        //'DoctrineORMModule',
+        'DoctrineModule',
+        'DoctrineORMModule',
+        'FacebookBundle',
         'Application',
     ),
     'module_listener_options' => array( 
