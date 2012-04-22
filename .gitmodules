@@ -7,12 +7,6 @@
 [submodule "vendor/DoctrineORMModule"]
 	path = vendor/DoctrineORMModule
 	url = git://github.com/doctrine/DoctrineORMModule.git
-[submodule "module/TwitterBootstrap"]
-	path = module/TwitterBootstrap
-	url = git://github.com/widmogrod/zf2-twitter-bootstrap-module.git
-[submodule "module/AsseticBundle"]
-	path = module/AsseticBundle
-	url = https://github.com/widmogrod/zf2-assetic-module.git
 [submodule "vendor/TwitterBootstrapFormDecorators"]
 	path = vendor/TwitterBootstrapFormDecorators
 	url = https://github.com/mwillbanks/TwitterBootstrapFormDecorators.git

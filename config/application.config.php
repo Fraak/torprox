@@ -2,6 +2,12 @@
 return array(
     'modules' => array(
         'Application',
+        'DoctrineModule',
+        'DoctrineORMModule',
+        //'TwitterBootstrapFormDecorators',
+        'ZfcBase',
+        'ZfcUser',
+        'ZfcUserDoctrineORM',
     ),
     'module_listener_options' => array( 
         'config_cache_enabled' => false,
