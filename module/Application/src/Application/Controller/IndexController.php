@@ -3,8 +3,8 @@
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel;
-
+    Zend\View\Model\ViewModel,
+    Zend\EventManager\EventCollection;
 class IndexController extends ActionController
 {
     /**

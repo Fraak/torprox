@@ -4,7 +4,8 @@ namespace Application;
 
 use Zend\Module\Manager,
     Zend\EventManager\StaticEventManager,
-    Zend\Module\Consumer\AutoloaderProvider;
+    Zend\Module\Consumer\AutoloaderProvider,
+    Zend\Mvc\MvcEvent;
 
 class Module implements AutoloaderProvider
 {

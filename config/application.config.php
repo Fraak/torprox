@@ -1,19 +1,12 @@
 <?php
 return array(
     'modules' => array(
+        //'DoctrineModule',
+        //'DoctrineORMModule',
         'Application',
-        'AsseticBundle',
-        'DoctrineModule',
-        'DoctrineORMModule',
-        'TwitterBootstrap',
-        'TwitterBootstrapFormDecorators',
-        'ZfcBase',
-        'ZfcUser',
-        'ZfcUserDoctrineORM',
-
     ),
     'module_listener_options' => array( 
-        'config_cache_enabled' => false,
+        'config_cache_enabled' => getenv('ENVIRONMENT') == 'production',
         'cache_dir'            => 'data/cache',
         'module_paths' => array(
             './module',

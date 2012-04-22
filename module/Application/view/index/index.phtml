@@ -1,6 +1,6 @@
 <div class="hero-unit">
-    <form action="<?=$this->url('search')?>">
-        <input type="text" name="query" value="<?=$this->query?>" class="search-bar" />
+    <form action="<?=$this->url('home')?>" enctype="application/x-www-form-urlencoded" method="get">
+        <input type="text" name="query" value="<?=htmlentities($this->query)?>" class="search-bar" />
         <input type="submit" value="Search" class="btn btn-success btn-large" />
     </form>
     <?php if(isset($this->feed)): ?>
