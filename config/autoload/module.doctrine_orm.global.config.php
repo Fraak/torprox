@@ -23,7 +23,7 @@ $settings = array(
     // only used if cache is set to memcache
     'memcache' => array( 
         'host' => isset($_SERVER['TORPROX_CACHE1_HOST']) ? $_SERVER['TORPROX_CACHE1_HOST'] : '',
-        'port' => isset($_SERVER['TORPROX_CACHE1_PORT']) ? $_SERVER['TORPROX_CACHE1_PORT'] : ''
+        'port' => isset($_SERVER['TORPROX_CACHE1_PORT']) ? $_SERVER['TORPROX_CACHE1_PORT'] : 0,
     ),
    
     // connection parameters
