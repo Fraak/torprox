@@ -12,11 +12,10 @@ web1:
   shared_writable_dirs:
     - /data
   before_deploy:
-    - "rm -Rf /data"
-    - "mkdir /data"
-    - "mkdir /data/cache"
+    - "rm -Rf data/*"
+    - "mkdir data/cache"
   after_deploy:
-    - "php /bin/doctrine.php orm:schema-tool:update --force"
+    - "php bin/doctrine.php orm:schema-tool:update --force"
 
 cache1:
   type: memcached
