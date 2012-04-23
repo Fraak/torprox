@@ -29,11 +29,11 @@ $settings = array(
     // connection parameters
     'connection' => array(
         'driver'   => 'pdo_mysql',
-        'host'     => isset($_SERVER['DB1_HOST']) ? $_SERVER['DB1_HOST'] : '',
-        'port'     => isset($_SERVER['DB1_PORT']) ? $_SERVER['DB1_PORT'] : '',
-        'user'     => isset($_SERVER['DB1_USER']) ? $_SERVER['DB1_USER'] : '',
-        'password' => isset($_SERVER['DB1_PASS']) ? $_SERVER['DB1_PASS'] : '',
-        'dbname'   => isset($_SERVER['DB1_NAME']) ? $_SERVER['DB1_NAME'] : '',
+        'host'     => isset($_SERVER['DB1_HOST']) ? $_SERVER['DB1_HOST'] : 'a.db.shared.orchestra.io',
+        'port'     => isset($_SERVER['DB1_PORT']) ? $_SERVER['DB1_PORT'] : '3306',
+        'user'     => isset($_SERVER['DB1_USER']) ? $_SERVER['DB1_USER'] : 'user_1340cbad',
+        'password' => isset($_SERVER['DB1_PASS']) ? $_SERVER['DB1_PASS'] : 'F_skogvFUl^E-R',
+        'dbname'   => isset($_SERVER['DB1_NAME']) ? $_SERVER['DB1_NAME'] : 'db_1340cbad',
     ),
     
     // driver settings
