@@ -3,7 +3,9 @@ return array(
     'modules' => array(
         'DoctrineModule',
         'DoctrineORMModule',
-        'FacebookBundle',
+        'ZfcBase',
+        'ZfcUser',
+        'ZfcUserDoctrineORM',
         'Application',
     ),
     'module_listener_options' => array( 

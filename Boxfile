@@ -15,6 +15,8 @@ torprox_web1:
     - "rm -Rf /data"
     - "mkdir /data"
     - "mkdir /data/cache"
+  after_deploy:
+    - "php /bin/doctrine.php orm:schema-tool:update --force"
 
 torprox_cache1:
   type: memcached

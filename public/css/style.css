@@ -69,3 +69,11 @@ div.container a.brand {
 {
     color: red;
 }
+
+div.auth
+{
+    float: right;
+    color: white;
+    line-height: 18px;
+    display: block;
+}
