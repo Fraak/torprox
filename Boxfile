@@ -18,10 +18,10 @@ web1:
   after_deploy:
     - "php /bin/doctrine.php orm:schema-tool:update --force"
 
-torproxcache1:
+cache1:
   type: memcached
   name: torprox_cache1
 
-torproxdb1:
+db1:
   name: torprox
   type: mysql
