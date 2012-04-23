@@ -18,22 +18,22 @@ $settings = array(
    'production' => getenv('ENVIRONMENT') == 'production',
    
     // sets the cache to use for metadata: one of 'array', 'apc', or 'memcache'
-    'cache' => getenv('ENVIRONMENT') == 'production' ? 'array' : 'array',
+    'cache' => getenv('ENVIRONMENT') == 'production' && isset($_SERVER['CACHE1_HOST']) ? 'memcache' : 'array',
    
     // only used if cache is set to memcache
     'memcache' => array( 
-        'host' => isset($_SERVER['TORPROX_CACHE1_HOST']) ? $_SERVER['TORPROX_CACHE1_HOST'] : '',
-        'port' => isset($_SERVER['TORPROX_CACHE1_PORT']) ? $_SERVER['TORPROX_CACHE1_PORT'] : 0,
+        'host' => isset($_SERVER['CACHE1_HOST']) ? $_SERVER['CACHE1_HOST'] : '',
+        'port' => isset($_SERVER['CACHE1_PORT']) ? $_SERVER['CACHE1_PORT'] : 0,
     ),
    
     // connection parameters
     'connection' => array(
         'driver'   => 'pdo_mysql',
-        'host'     => isset($_SERVER['TORPROX_DB1_HOST']) ? $_SERVER['TORPROX_DB1_HOST'] : '',
-        'port'     => isset($_SERVER['TORPROX_DB1_PORT']) ? $_SERVER['TORPROX_DB1_PORT'] : '',
-        'user'     => isset($_SERVER['TORPROX_DB1_USER']) ? $_SERVER['TORPROX_DB1_USER'] : '',
-        'password' => isset($_SERVER['TORPROX_DB1_PASS']) ? $_SERVER['TORPROX_DB1_PASS'] : '',
-        'dbname'   => isset($_SERVER['TORPROX_DB1_NAME']) ? $_SERVER['TORPROX_DB1_NAME'] : '',
+        'host'     => isset($_SERVER['DB1_HOST']) ? $_SERVER['DB1_HOST'] : '',
+        'port'     => isset($_SERVER['DB1_PORT']) ? $_SERVER['DB1_PORT'] : '',
+        'user'     => isset($_SERVER['DB1_USER']) ? $_SERVER['DB1_USER'] : '',
+        'password' => isset($_SERVER['DB1_PASS']) ? $_SERVER['DB1_PASS'] : '',
+        'dbname'   => isset($_SERVER['DB1_NAME']) ? $_SERVER['DB1_NAME'] : '',
     ),
     
     // driver settings
