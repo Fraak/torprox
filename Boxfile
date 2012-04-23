@@ -14,8 +14,6 @@ web1:
   before_deploy:
     - "rm -Rf data/*"
     - "mkdir data/cache"
-  after_deploy:
-    - "bin/doctrine.php orm:schema-tool:update --force"
 
 cache1:
   type: memcached
