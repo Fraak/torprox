@@ -69,11 +69,6 @@ class IndexController extends ActionController
 
     public function indexAction()
     {
-        if($this->getRequest()->query()->get('debug') != null)
-        {
-            phpinfo();
-            die();
-        }
         return $this->getViewModel();
     }
 
