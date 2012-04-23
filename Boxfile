@@ -2,7 +2,7 @@ global:
   env:
     - ENVIRONMENT: production
 
-torprox_web1:
+web1:
   name: torprox
   document_root: public/
   php_date_timezone: "Europe/Amsterdam"
@@ -18,10 +18,10 @@ torprox_web1:
   after_deploy:
     - "php /bin/doctrine.php orm:schema-tool:update --force"
 
-torprox_cache1:
+torproxcache1:
   type: memcached
   name: torprox_cache1
 
-torprox_db1:
+torproxdb1:
   name: torprox
   type: mysql
