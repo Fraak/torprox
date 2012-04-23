@@ -18,7 +18,7 @@ $settings = array(
    'production' => getenv('ENVIRONMENT') == 'production',
    
     // sets the cache to use for metadata: one of 'array', 'apc', or 'memcache'
-    'cache' => getenv('ENVIRONMENT') == 'production' ? 'memcache' : 'array',
+    'cache' => getenv('ENVIRONMENT') == 'production' ? 'array' : 'array',
    
     // only used if cache is set to memcache
     'memcache' => array( 
