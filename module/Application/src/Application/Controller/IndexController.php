@@ -13,7 +13,7 @@ class IndexController extends ActionController
      */
     private function getRss($query)
     {
-        $client = new \Zend\Http\Client('http://torrentz.eu/feed');
+        $client = new \Zend\Http\Client('http://torrentz.eu/feedA');
         $client
             ->getRequest()
             ->query()

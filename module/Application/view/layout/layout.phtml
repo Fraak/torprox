@@ -44,14 +44,16 @@ echo $this->doctype();
                         <span class="icon-bar"></span>
                     </a>
                     <a class="brand" href="<?php echo $this->url('home') ?>">TorProx</a>
-                    <div class="auth">
-                        <?php if($this->zfcUserIdentity()): ?>
-                            Hello, <?=$this->zfcUserIdentity()->getDisplayName()?> -
-                            <a href="<?=$this->url('zfcuser/logout')?>">Logout</a>
-                        <?php else: ?>
-                            <a href="<?=$this->url('zfcuser/login')?>">Login</a>
-                        <?php endif; ?>
-                    </div>
+                    <?php if($this->getBroker()->isLoaded('zfcUserIdentity')): ?>
+                        <div class="auth">
+                            <?php if($this->zfcUserIdentity()): ?>
+                                Hello, <?=$this->zfcUserIdentity()->getDisplayName()?> -
+                                <a href="<?=$this->url('zfcuser/logout')?>">Logout</a>
+                            <?php else: ?>
+                                <a href="<?=$this->url('zfcuser/login')?>">Login</a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
