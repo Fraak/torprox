@@ -1,0 +1,44 @@
+<div class="hero-unit">
+    <form action="<?=$this->url('home')?>" enctype="application/x-www-form-urlencoded" method="get">
+        <input type="text" name="query" value="<?=htmlentities($this->query)?>" class="search-bar" />
+        <input type="submit" value="Search" class="btn btn-success btn-large" />
+    </form>
+</div>
+
+<div class="row">
+	<div class="span12">
+		<?php if(isset($this->feed)): ?>
+		<a href="<?=$this->url('rss')?>?query=<?=$this->query?>" class="rss-link"></a>
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Name</th>
+				<th width="70px">Size</th>
+				<th width="20px">S</th>
+				<th width="20px">P</th>
+				<th width="16px"></th>
+			</tr>
+			</thead>
+			<tbody>
+				<?php
+				$i = 0;
+				foreach($this->feed as $entry):
+					$size = $entry->getElement()->getElementsByTagName('size')->item(0)->nodeValue;
+					$peers = $entry->getElement()->getElementsByTagName('peers')->item(0)->nodeValue;
+					$seeds = $entry->getElement()->getElementsByTagName('seeds')->item(0)->nodeValue;
+					$link = $entry->getEnclosure()->url;
+					$i++;
+					?>
+				<tr class="<?=($i % 2 ? 'odd' : 'even')?>">
+					<td><a href="<?=$entry->getLink()?>"><?=$entry->getTitle()?></a></td>
+					<td><?=$size?></td>
+					<td class="seeds"><?=$seeds?></td>
+					<td class="peers"><?=$peers?></td>
+					<td><a href="<?=$link?>" class="magnet-link"></a></td>
+				</tr>
+					<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php endif; ?>
+	</div>
+</div>

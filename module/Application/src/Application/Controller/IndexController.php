@@ -2,10 +2,10 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel,
-    Zend\EventManager\EventCollection;
-class IndexController extends ActionController
+use Zend\Mvc\Controller\AbstractActionController,
+    Zend\View\Model\ViewModel;
+
+class IndexController extends AbstractActionController
 {
     /**
      * @param string $query
@@ -16,7 +16,7 @@ class IndexController extends ActionController
         $client = new \Zend\Http\Client('http://torrentz.eu/feedA');
         $client
             ->getRequest()
-            ->query()
+            ->getQuery()
             ->set('q', $query);
 
         $reader = \Zend\Feed\Reader\Reader::importString($client->send()->getBody());
@@ -47,7 +47,7 @@ class IndexController extends ActionController
      */
     private function getQuery()
     {
-        return $this->getRequest()->query()->get('query');
+        return $this->getRequest()->getQuery()->get('query');
     }
 
     /**
