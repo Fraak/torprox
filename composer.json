@@ -1,0 +1,13 @@
+{
+    "name": "wfk/torprox",
+    "require": {
+        "zendframework/zendframework": "2.*"
+    },
+    "minimum-stability": "alpha",
+    "authors": [
+        {
+            "name": "Freek Gruntjes",
+            "email": "freek@gruntjes.net"
+        }
+    ]
+}
