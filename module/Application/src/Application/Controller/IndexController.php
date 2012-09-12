@@ -74,7 +74,7 @@ class IndexController extends AbstractActionController
 
     public function rssAction()
     {
-        $this->getResponse()->headers()->addHeaderLine('content-type', 'application/xml');
+        $this->getResponse()->getHeaders()->addHeaderLine('content-type', 'application/xml');
         $model = $this->getViewModel();
         $model->setTerminal(true);
         return $model;
