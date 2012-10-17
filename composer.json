@@ -1,14 +1,9 @@
 {
-    "name": "Freek/TorProx",
-    "description": "Torrent search proxy",
+    "name": "wfk/torprox",
     "require": {
-        "php": ">=5.4",
-        "zendframework/zendframework": "2.*",
-        "wfk/wfk-snc-social-auth-doctrine-orm": "dev-master",
-        "wfk/wfk-layout": "dev-master",
-        "bjyoungblood/bjy-authorize": "dev-master"
+        "zendframework/zendframework": "2.*"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "alpha",
     "authors": [
         {
             "name": "Freek Gruntjes",

@@ -2,10 +2,10 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\AbstractActionController,
+    Zend\View\Model\ViewModel;
 
-class IndexController extends BaseController
+class IndexController extends AbstractActionController
 {
     /**
      * @param string $query
@@ -13,11 +13,6 @@ class IndexController extends BaseController
      */
     private function getRss($query)
     {
-        if($this->hasIdentity())
-        {
-            $query .= ' ' . $this->getUserSettings()->getSearchAddition();
-        }
-        $query = trim($query);
         $client = new \Zend\Http\Client('http://torrentz.eu/feedA');
         $client
             ->getRequest()
@@ -56,41 +51,20 @@ class IndexController extends BaseController
     }
 
     /**
-     * @return \Application\Entity\Search[]
-     */
-    private function getUserQueries()
-    {
-        return $this->getEntityManager()
-            ->createQuery('SELECT e FROM Application\Entity\Search e WHERE e.user = :user')
-            ->setParameter('user', $this->getIdentity())
-            ->getResult();
-    }
-
-    /**
      * @return ViewModel
      */
     private function getViewModel()
     {
         $query = $this->getQuery();
-
-        $viewModel = new ViewModel(array(
-            'query' => $query,
-            'messages' => $this->flashMessenger()->hasMessages() ? $this->flashMessenger()->getMessages() : array(),
-        ));
-
-        if ($this->hasIdentity())
-        {
-            $viewModel->setVariable('user_identity', $this->getIdentity());
-            $viewModel->setVariable('user_settings', $this->getUserSettings());
-            $viewModel->setVariable('user_queries', $this->getUserQueries());
-        }
-
         if($query != null)
         {
-            $viewModel->setVariable('feed', $this->getRss($query));
+            return new ViewModel(array(
+                'feed' => $this->getRss($query),
+                'query' => $query
+            ));
         }
 
-        return $viewModel;
+        return new ViewModel(array('query' => $query));
     }
 
     public function indexAction()
@@ -100,7 +74,7 @@ class IndexController extends BaseController
 
     public function rssAction()
     {
-        $this->getResponse()->headers()->addHeaderLine('content-type', 'application/xml');
+        $this->getResponse()->getHeaders()->addHeaderLine('content-type', 'application/xml');
         $model = $this->getViewModel();
         $model->setTerminal(true);
         return $model;
