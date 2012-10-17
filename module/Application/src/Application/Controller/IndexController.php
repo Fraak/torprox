@@ -2,10 +2,10 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel,
-    Zend\EventManager\EventCollection;
-class IndexController extends ActionController
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class IndexController extends BaseController
 {
     /**
      * @param string $query
@@ -13,10 +13,15 @@ class IndexController extends ActionController
      */
     private function getRss($query)
     {
+        if($this->hasIdentity())
+        {
+            $query .= ' ' . $this->getUserSettings()->getSearchAddition();
+        }
+        $query = trim($query);
         $client = new \Zend\Http\Client('http://torrentz.eu/feedA');
         $client
             ->getRequest()
-            ->query()
+            ->getQuery()
             ->set('q', $query);
 
         $reader = \Zend\Feed\Reader\Reader::importString($client->send()->getBody());
@@ -47,7 +52,18 @@ class IndexController extends ActionController
      */
     private function getQuery()
     {
-        return $this->getRequest()->query()->get('query');
+        return $this->getRequest()->getQuery()->get('query');
+    }
+
+    /**
+     * @return \Application\Entity\Search[]
+     */
+    private function getUserQueries()
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT e FROM Application\Entity\Search e WHERE e.user = :user')
+            ->setParameter('user', $this->getIdentity())
+            ->getResult();
     }
 
     /**
@@ -56,15 +72,25 @@ class IndexController extends ActionController
     private function getViewModel()
     {
         $query = $this->getQuery();
-        if($query != null)
+
+        $viewModel = new ViewModel(array(
+            'query' => $query,
+            'messages' => $this->flashMessenger()->hasMessages() ? $this->flashMessenger()->getMessages() : array(),
+        ));
+
+        if ($this->hasIdentity())
         {
-            return new ViewModel(array(
-                'feed' => $this->getRss($query),
-                'query' => $query
-            ));
+            $viewModel->setVariable('user_identity', $this->getIdentity());
+            $viewModel->setVariable('user_settings', $this->getUserSettings());
+            $viewModel->setVariable('user_queries', $this->getUserQueries());
         }
 
-        return new ViewModel(array('query' => $query));
+        if($query != null)
+        {
+            $viewModel->setVariable('feed', $this->getRss($query));
+        }
+
+        return $viewModel;
     }
 
     public function indexAction()

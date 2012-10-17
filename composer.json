@@ -1,0 +1,18 @@
+{
+    "name": "Freek/TorProx",
+    "description": "Torrent search proxy",
+    "require": {
+        "php": ">=5.4",
+        "zendframework/zendframework": "2.*",
+        "wfk/wfk-snc-social-auth-doctrine-orm": "dev-master",
+        "wfk/wfk-layout": "dev-master",
+        "bjyoungblood/bjy-authorize": "dev-master"
+    },
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Freek Gruntjes",
+            "email": "freek@gruntjes.net"
+        }
+    ]
+}

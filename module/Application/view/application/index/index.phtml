@@ -1,0 +1,96 @@
+<?php if(count($this->messages)): ?>
+    <div class="span12">
+        <?php foreach($this->messages as $message): ?>
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <?=$message?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+<div class="span12">
+    <h3>Search</h3>
+    <form action="<?=$this->url('home')?>" enctype="application/x-www-form-urlencoded" method="get">
+        <div class="input-prepend input-append">
+            <span class="add-on"><i class="icon-search"></i></span>
+            <?php if($this->zfcUserIdentity()): ?>
+                <input class="span7" type="text" name="query" placeholder="Search Query" value="<?=htmlentities($this->query)?>">
+                <span class="add-on" id="search-addition"><?=$this->user_settings->getSearchAddition()?></span>
+            <?php else: ?>
+                <input class="span10" type="text" name="query" placeholder="Search Query" value="<?=htmlentities($this->query)?>">
+            <?php endif; ?>
+
+            <button type="submit" class="btn btn-success input-medium search-button">Search</button>
+        </div>
+    </form>
+</div>
+<?php if($this->zfcUserIdentity()): ?>
+    <div class="span12">
+        <h3>Stored</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Query</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($this->user_queries as $query): /** @var $query \Application\Entity\Search */?>
+                <?php $_query = $this->escape($query->getQuery()); ?>
+                    <tr>
+                        <td><?=$query->getId()?></td>
+                        <td>
+                            <a href="<?=$this->url('home').'?query='.urlencode($_query)?>"><?=$_query?></a>
+                            <span class="default_search"><?=$this->user_settings->getSearchAddition()?></span>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <form action="<?=$this->url('search/add')?>" enctype="application/x-www-form-urlencoded" method="post">
+            <div class="input-prepend input-append">
+                <span class="add-on"><i class="icon-search"></i></span>
+                <input class="span10" type="text" name="query" placeholder="Search Query" value="<?=htmlentities($this->query)?>">
+                <button type="submit" class="btn btn-success input-medium search-button">Add</button>
+            </div>
+        </form>
+    </div>
+<?php endif; ?>
+<div class="span12">
+    <p>
+        <?php if(isset($this->feed)): ?>
+            <h3>Result</h3>
+            <a href="<?=$this->url('rss')?>?query=<?=$this->query?>" class="rss-link"></a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Size</th>
+                        <th>Seeds</th>
+                        <th>Peers</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $i = 0;
+                        foreach($this->feed as $entry):
+                            $size = $entry->getElement()->getElementsByTagName('size')->item(0)->nodeValue;
+                            $peers = $entry->getElement()->getElementsByTagName('peers')->item(0)->nodeValue;
+                            $seeds = $entry->getElement()->getElementsByTagName('seeds')->item(0)->nodeValue;
+                            $link = $entry->getEnclosure()->url;
+                            $i++;
+                    ?>
+                        <tr class="<?=($i % 2 ? 'odd' : 'even')?>">
+                            <td><a href="<?=$entry->getLink()?>"><?=$entry->getTitle()?></a></td>
+                            <td><?=$size?></td>
+                            <td class="seeds"><?=$seeds?></td>
+                            <td class="peers"><?=$peers?></td>
+                            <td><a href="<?=$link?>" class="magnet-link"></a></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </p>
+</div>
