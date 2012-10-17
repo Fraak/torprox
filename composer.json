@@ -1,7 +1,9 @@
 {
     "name": "wfk/torprox",
     "require": {
-        "zendframework/zendframework": "2.*"
+        "zendframework/zendframework": "2.*",
+        "wfk/wfk-layout": "dev-master",
+        "wfk/wfk-snc-social-auth-doctrine-orm": "dev-master"
     },
     "minimum-stability": "alpha",
     "authors": [
