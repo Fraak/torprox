@@ -80,12 +80,12 @@ class Module implements
         if (!$e->getRequest() instanceof HttpRequest)
             return;
 
-        if (session_id())
+        if (!session_id())
             session_start();
 
-        if(!isset($_SESSION["HA::STORE"]))
+        if(!isset($_SESSION['HA::STORE']))
         {
-            $_SESSION["HA::STORE"] = array();
+            $_SESSION['HA::STORE'] = array();
         }
     }
 }

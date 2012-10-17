@@ -3,9 +3,10 @@
     "require": {
         "zendframework/zendframework": "2.*",
         "wfk/wfk-layout": "dev-master",
+        "bjyoungblood/BjyAuthorize": "dev-master",
         "wfk/wfk-snc-social-auth-doctrine-orm": "dev-master"
     },
-    "minimum-stability": "alpha",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Freek Gruntjes",
