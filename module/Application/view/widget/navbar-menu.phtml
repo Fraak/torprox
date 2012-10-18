@@ -1,0 +1,61 @@
+<?php
+if(!$this->zfcUserIdentity())
+{
+    return;
+}
+/**
+ * @author Kanstantsin A Kamkou (2ka.by)
+ * History:
+ *  - 21.08.2012 Bootstrap 2.1.0 corrections
+ */
+$html = array('<ul class="' . ($this->ulClass ?: 'nav') . '">');
+
+/** @var $page Zend\Navigation\Page\AbstractPage */
+foreach ($this->container as $page) {
+    // visibility of the page
+    if (!$page->isVisible()) {
+        continue;
+    }
+
+    // drop down
+    $dropDown = count($page->getPages()) !== 0;
+    $active = $page->isActive(true);
+
+    $liClasses = array();
+    if($dropDown)
+    {
+        $liClasses[] = 'dropdown';
+    }
+
+    if($active)
+    {
+        $liClasses[] = 'active';
+    }
+
+    // header
+    $html[] = '<li' . (count($liClasses) > 0 ? ' class="' . join(' ', $liClasses) . '"' : '') . '>';
+
+    if (!$dropDown) {
+        $html[] = '<a href="' . $page->getHref() . '">';
+    } else {
+        $html[] = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
+    }
+
+    $html[] = $this->translate($page->getLabel());
+
+    if ($dropDown) {
+        $html[] = '<b class="caret"></b>';
+    }
+    $html[] = '</a>';
+
+    if($dropDown)
+    {
+        $html[] = $this->partial('widget/navbar-menu.phtml', array('container' => $page, 'ulClass' => 'dropdown-menu'));
+    }
+
+    $html[] = "</li>";
+}
+
+$html[] = '</ul>';
+
+echo join(PHP_EOL, $html);

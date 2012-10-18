@@ -73,6 +73,7 @@ class Module implements
      */
     public function onBootstrap(EventInterface $e)
     {
+        // Make sure some silly ha store var is set to fix notice in bjhauthorize
         /** @var $e \Zend\Mvc\MvcEvent */
         if (!$e instanceof MvcEvent)
             return;
