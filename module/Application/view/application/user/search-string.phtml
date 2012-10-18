@@ -1,0 +1,36 @@
+<div class="span12">
+    <h3>Stored</h3>
+    <table class="table table-striped" id="search-string">
+        <thead>
+            <tr>
+                <th class="id">#</th>
+                <th class="query">Query</th>
+                <th class="result">Result</th>
+                <th class="buttons"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->user_queries as $query): /** @var $query \Application\Entity\Search */?>
+            <?php $_query = $this->escapeHtml($query->getQuery()); ?>
+                <tr>
+                    <td><?=$query->getId()?></td>
+                    <td>
+                        <a href="<?=$this->url('home').'?query='.urlencode($_query)?>"><?=$_query?></a>
+                        <span class="default_search"><?=$this->user_settings->getSearchAddition()?></span>
+                    </td>
+                    <td><?=$query->getResult()?></td>
+                    <td class="btn-group">
+                        <a href="<?=$this->url('search/delete', array('id' => $query->getId()))?>" class="btn btn-small"><i class="icon-trash"></i></a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <form action="<?=$this->url('search/add')?>" enctype="application/x-www-form-urlencoded" method="post">
+        <div class="input-prepend input-append">
+            <span class="add-on"><i class="icon-search"></i></span>
+            <input class="span10" type="text" name="query" placeholder="Search Query" value="<?=htmlentities($this->query)?>">
+            <button type="submit" class="btn btn-success input-medium search-button">Add</button>
+        </div>
+    </form>
+</div>

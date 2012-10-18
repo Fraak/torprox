@@ -4,7 +4,8 @@
         "zendframework/zendframework": "2.*",
         "wfk/wfk-layout": "dev-master",
         "bjyoungblood/BjyAuthorize": "dev-master",
-        "wfk/wfk-snc-social-auth-doctrine-orm": "dev-master"
+        "wfk/wfk-snc-social-auth-doctrine-orm": "dev-master",
+        "guzzle/guzzle": "3.*"
     },
     "minimum-stability": "dev",
     "authors": [

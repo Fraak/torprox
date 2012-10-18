@@ -18,6 +18,13 @@ return array(
                     ),
                 ),
             ),
+
+            'stored' => array(
+                'label' => 'Stored',
+                'route' => 'search/list',
+                'resource' => 'user-config',
+                'privilege' => 'edit',
+            ),
         ),
     ),
 );

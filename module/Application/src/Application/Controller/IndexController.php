@@ -56,35 +56,14 @@ class IndexController extends BaseController
     }
 
     /**
-     * @return \Application\Entity\Search[]
-     */
-    private function getUserQueries()
-    {
-        return $this->getEntityManager()
-            ->createQuery('SELECT e FROM Application\Entity\Search e WHERE e.user = :user')
-            ->setParameter('user', $this->getIdentity())
-            ->getResult();
-    }
-
-    /**
      * @return ViewModel
      */
-    private function getViewModel()
+    protected function getViewModel()
     {
+        $viewModel = parent::getViewModel();
+
         $query = $this->getQuery();
-
-        $viewModel = new ViewModel(array(
-            'query' => $query,
-            'messages' => $this->flashMessenger()->hasMessages() ? $this->flashMessenger()->getMessages() : array(),
-        ));
-
-        if ($this->hasIdentity())
-        {
-            $viewModel->setVariable('user_identity', $this->getIdentity());
-            $viewModel->setVariable('user_settings', $this->getUserSettings());
-            $viewModel->setVariable('user_queries', $this->getUserQueries());
-        }
-
+        $viewModel->setVariable('query', $query);
         if($query != null)
         {
             $viewModel->setVariable('feed', $this->getRss($query));

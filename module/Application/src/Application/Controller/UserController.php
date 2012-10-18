@@ -2,12 +2,46 @@
 
 namespace Application\Controller;
 
+use Guzzle\Http\Client;
 use Zend\Http\Request as HttpRequest;
 use Application\Entity\Search;
 use Zend\View\Model\ViewModel;
 
 class UserController extends BaseController
 {
+    /**
+     * @return \Application\Entity\Search[]
+     */
+    protected function getUserQueries()
+    {
+        $results = $this->getEntityManager()
+            ->createQuery('SELECT e FROM Application\Entity\Search e WHERE e.user = :user')
+            ->setParameter('user', $this->getIdentity())
+            ->getResult();
+
+        // Add result to search
+        $client = new Client();
+
+        $searchAddition = $this->getUserSettings()->getSearchAddition();
+        $searches = array();
+
+        foreach($results as $key => $result)
+        {
+            $searches[$key] = $client->get('http://torrentz.eu/feedA?q=' . urlencode(trim($result->getQuery() . ' ' . $searchAddition)));
+        }
+
+        $responses = $client->send($searches);
+        /** @var $response \Guzzle\Http\Message\Response */
+        foreach($responses as $key => $response)
+        {
+            $xml = new \SimpleXMLElement($response->getBody(true));
+            $result = count($xml->xpath('/rss/channel/item'));
+            $results[$key]->setResult($result);
+        }
+
+        return $results;
+    }
+
     public function settingsAction()
     {
         $request = $this->getHttpRequest();
@@ -55,11 +89,31 @@ class UserController extends BaseController
                 $this->getEntityManager()->persist($entity);
                 $this->getEntityManager()->flush();
                 $this->flashMessenger()->addMessage('Query saved.');
-                $url = $this->url()->fromRoute('home') . '?query=' . urlencode($entity->getQuery());
-                return $this->redirect()->toUrl($url);
+                return $this->redirect()->toRoute('search/list');
             }
         }
 
         return $this->notFoundAction();
+    }
+
+    public function searchStringAction()
+    {
+        $viewModel = $this->getViewModel();
+        $viewModel->setVariable('user_queries', $this->getUserQueries());
+        return $viewModel;
+    }
+
+    public function searchStringDeleteAction()
+    {
+        $query = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->delete('Application\Entity\Search', 'e')
+            ->andWhere('e.user = :user')
+            ->andWhere('e.id = :id')
+            ->setParameter('user', $this->getIdentity())
+            ->setParameter('id', $this->getEvent()->getRouteMatch()->getParam('id'));
+
+        $query->getQuery()->execute();
+        return $this->redirect()->toRoute('search/list');
     }
 }

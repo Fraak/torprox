@@ -52,11 +52,23 @@ return array(
                         ),
                     ),
                     'delete' => array(
-                        'type' => 'Literal',
+                        'type' => 'Segment',
                         'options' => array(
-                            'route' => '/delete',
+                            'route' => '/delete/:id',
                             'defaults' => array(
                                 'action' => 'search-string-delete',
+                            ),
+                            'constraints' => array(
+                                'id' => '[0-9]+'
+                            ),
+                        ),
+                    ),
+                    'list' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/list',
+                            'defaults' => array(
+                                'action' => 'search-string',
                             ),
                         ),
                     ),

@@ -94,3 +94,19 @@ span.default_search
 {
     color: #AAAAAA;
 }
+
+#search-string .id {
+    width: 10px;
+}
+
+#search-string .query {
+
+}
+
+#search-string .result {
+    width: 10px;
+}
+
+#search-string .buttons {
+    width: 10px;
+}

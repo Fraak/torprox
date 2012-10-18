@@ -37,6 +37,12 @@ class Search
     private $query;
 
     /**
+     * @var int
+     * @ZF\Exclude()
+     */
+    private $result = '-';
+
+    /**
      * @return int
      */
     public function getId()
@@ -74,5 +80,21 @@ class Search
     public function setQuery($query)
     {
         $this->query = (string) $query;
+    }
+
+    /**
+     * @return int
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * @param int $result
+     */
+    public function setResult($result)
+    {
+        $this->result = $result;
     }
 }

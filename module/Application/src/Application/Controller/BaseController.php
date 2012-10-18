@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 use Doctrine\ORM\EntityManager;
 use Zend\Http\Request as HttpRequest;
 
@@ -74,5 +75,23 @@ class BaseController extends AbstractActionController
         }
 
         return $request;
+    }
+
+    /**
+     * @return \Zend\View\Model\ViewModel
+     */
+    protected function getViewModel()
+    {
+        $viewModel = new ViewModel();
+        $viewModel->setVariable('messages', $this->flashMessenger()->hasMessages() ? $this->flashMessenger()->getMessages() : array());
+
+        if ($this->hasIdentity())
+        {
+            $viewModel->setVariable('user_identity', $this->getIdentity());
+            $viewModel->setVariable('user_settings', $this->getUserSettings());
+            $viewModel->setVariable('user_queries', $this->getUserQueries());
+        }
+
+        return $viewModel;
     }
 }
