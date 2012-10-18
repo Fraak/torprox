@@ -89,7 +89,6 @@ class BaseController extends AbstractActionController
         {
             $viewModel->setVariable('user_identity', $this->getIdentity());
             $viewModel->setVariable('user_settings', $this->getUserSettings());
-            $viewModel->setVariable('user_queries', $this->getUserQueries());
         }
 
         return $viewModel;
