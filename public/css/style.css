@@ -68,3 +68,29 @@ div.container a.brand {
 {
     color: red;
 }
+
+.icon-facebook
+{
+    background: url("../img/icon-facebook.png") 0px 0px;
+}
+
+.icon-google
+{
+    background: url("../img/icon-google.png") 0px 0px;
+}
+
+.search-button
+{
+    width: 175px;
+}
+
+#search-addition
+{
+    width: 290px;
+    text-align: left;
+}
+
+span.default_search
+{
+    color: #AAAAAA;
+}

@@ -36,7 +36,7 @@
             </thead>
             <tbody>
                 <?php foreach($this->user_queries as $query): /** @var $query \Application\Entity\Search */?>
-                <?php $_query = $this->escape($query->getQuery()); ?>
+                <?php $_query = $this->escapeHtml($query->getQuery()); ?>
                     <tr>
                         <td><?=$query->getId()?></td>
                         <td>
