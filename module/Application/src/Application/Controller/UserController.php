@@ -15,7 +15,7 @@ class UserController extends BaseController
     protected function getUserQueries()
     {
         $results = $this->getEntityManager()
-            ->createQuery('SELECT e FROM Application\Entity\Search e WHERE e.user = :user')
+            ->createQuery('SELECT e FROM Application\Entity\Search e WHERE e.user = :user ORDER BY e.query')
             ->setParameter('user', $this->getIdentity())
             ->getResult();
 

@@ -64,7 +64,7 @@ class IndexController extends BaseController
 
         $query = $this->getQuery();
         $viewModel->setVariable('query', $query);
-        if($query != null)
+        if($query !== null)
         {
             $viewModel->setVariable('feed', $this->getRss($query));
         }
