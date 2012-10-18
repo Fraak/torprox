@@ -29,9 +29,10 @@ class Search
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=1024, nullable=true)
+     * @ORM\Column(type="string", length=1024, nullable=false)
      * @ZF\Filter({"name":"StringTrim"})
      * @ZF\Options({"label":"Search string:"})
+     * @ZF\Validator({"name":"StringLength", "options":{"min":1, "max":1024}})
      * @ZF\Attributes({"placeholder":"Example: the dark knight rises", "class":"input-xxlarge"})
      */
     private $query;

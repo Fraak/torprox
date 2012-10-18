@@ -27,10 +27,12 @@ class UserController extends BaseController
 
         foreach($results as $key => $result)
         {
+            if($result->getQuery() === '') continue;
             $searches[$key] = $client->get('http://torrentz.eu/feedA?q=' . urlencode(trim($result->getQuery() . ' ' . $searchAddition)));
         }
 
         $responses = $client->send($searches);
+
         /** @var $response \Guzzle\Http\Message\Response */
         foreach($responses as $key => $response)
         {
@@ -78,6 +80,7 @@ class UserController extends BaseController
 
         $entity = new Search();
         $entity->setUser($identity);
+        /** @var $form \Zend\Form\Form */
         $form = $this->getFormFactory()->createForm('Application\Entity\Search');
         $form->bind($entity);
 
@@ -89,6 +92,20 @@ class UserController extends BaseController
                 $this->getEntityManager()->persist($entity);
                 $this->getEntityManager()->flush();
                 $this->flashMessenger()->addMessage('Query saved.');
+                return $this->redirect()->toRoute('search/list');
+            }
+            else
+            {
+                $text = '<ul>';
+                foreach($form->getMessages() as $element => $messages)
+                {
+                    foreach($messages as $messageText)
+                    {
+                        $text .= '<li>' . $messageText . '</li>';
+                    }
+                }
+                $text .= '</ul>';
+                $this->flashMessenger()->addMessage($text);
                 return $this->redirect()->toRoute('search/list');
             }
         }
